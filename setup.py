@@ -10,15 +10,15 @@ setup(name='roboarm',
 """,
       classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       keywords='',
-      author='',
-      author_email='',
+      author='Vladimir Iakovlev',
+      author_email='nvbn.rm@gmail.com',
       url='',
-      license='',
+      license='BSD',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
-      zip_safe=False,
+      zip_safe=True,
       install_requires=[
-          # -*- Extra requirements: -*-
+          'pyusb',
       ],
       entry_points="""
       # -*- Entry points: -*-
