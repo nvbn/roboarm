@@ -60,8 +60,8 @@ Example usage:
     time.sleep(2)
     arm.grips.stop()
 
-shoulder
------
+Shoulder
+--------
 
 .. function:: arm.shoulder.up(timeout=1)
 
