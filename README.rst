@@ -39,4 +39,4 @@ For rotate arm clockwise, move elbow up and open grips:
 Examples
 --------
 
- - `examples/controller.py` - simple gui tool for working with arm(require pygame)
+- `examples/controller.py` - simple gui tool for working with arm(require pygame)
