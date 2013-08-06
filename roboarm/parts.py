@@ -42,26 +42,31 @@ class MovementPart(Part):
 
 
 class Grips(MovementPart):
+    """Arm grips"""
     open = PartAction(const.GRIPS_OPEN)
     close = PartAction(const.GRIPS_CLOSE)
 
 
 class Wrist(MovementPart):
+    """Arm wrist"""
     up = PartAction(const.WRIST_UP)
     down = PartAction(const.WRIST_DOWN)
 
 
 class Elbow(MovementPart):
+    """Arm elbow"""
     up = PartAction(const.ELBOW_UP)
     down = PartAction(const.ELBOW_DOWN)
 
 
 class Shoulder(MovementPart):
+    """Arm shoulder"""
     up = PartAction(const.SHOULDER_UP)
     down = PartAction(const.SHOULDER_DOWN)
 
 
 class Base(Part):
+    """Arm base"""
     PART = const.ROTATE_PART
 
     rotate_clock = PartAction(const.BASE_CLOCK)
@@ -69,10 +74,13 @@ class Base(Part):
 
 
 class Led(Part):
+    """Arm led"""
     PART = const.LED_PART
 
     def on(self, timeout=None):
+        """Turn led on"""
         self._perform(const.LED_ON, timeout)
 
     def off(self, timeout=None):
+        """Turn led off"""
         self._perform(const.LED_OFF, timeout)
