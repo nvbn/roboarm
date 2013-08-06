@@ -7,7 +7,10 @@ setup(name='roboarm',
       version=version,
       description="Python library for controlling owi robotic arm edge",
       long_description=open('README.rst').read(),
-      classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
+      classifiers=[
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 3',
+      ], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       keywords='',
       author='Vladimir Iakovlev',
       author_email='nvbn.rm@gmail.com',
