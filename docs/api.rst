@@ -61,7 +61,7 @@ Example usage:
     arm.grips.stop()
 
 Wrist
---------
+-----
 
 .. function:: arm.wrist.up(timeout=1)
 
