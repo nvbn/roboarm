@@ -6,4 +6,8 @@ install:
   - pip install . --use-mirrors
   - pip install -r test_requirements.txt --use-mirrors
 script:
-  - nosetests
+  - nosetests --with-coverage
+after_success:
+  - coverage report
+  - pip install --quiet python-coveralls
+  - coveralls
