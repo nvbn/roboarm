@@ -60,18 +60,18 @@ Example usage:
     time.sleep(2)
     arm.grips.stop()
 
-shoulder
------
+Wrist
+--------
 
-.. function:: arm.shoulder.up(timeout=1)
+.. function:: arm.wrist.up(timeout=1)
 
-    Start moving up device shoulder and stop after timeout. If *timeout=None* don't stop.
+    Start moving up device wrist and stop after timeout. If *timeout=None* don't stop.
 
-.. function:: arm.shoulder.down(timeout=1)
+.. function:: arm.wrist.down(timeout=1)
 
-    Start moving down device shoulder and stop after timeout. If *timeout=None* don't stop.
+    Start moving down device wrist and stop after timeout. If *timeout=None* don't stop.
 
-.. function:: arm.shoulder.stop()
+.. function:: arm.wrist.stop()
 
     Stop current action.
     
@@ -85,13 +85,13 @@ Example usage:
 
     arm = Arm()
 
-    # up shoulder for 2 seconds:
-    arm.shoulder.up(2)
+    # up wrist for 2 seconds:
+    arm.wrist.up(2)
 
-    # down shoulder, wait 2 seconds and stop:
-    arm.shoulder.down(None)
+    # down wrist, wait 2 seconds and stop:
+    arm.wrist.down(None)
     time.sleep(2)
-    arm.shoulder.stop()
+    arm.wrist.stop()
 
 Elbow
 -----
