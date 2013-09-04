@@ -1,6 +1,17 @@
 Roboarm
 =======
 
+.. image:: https://travis-ci.org/nvbn/roboarm.png
+   :alt: Build Status
+   :target: https://travis-ci.org/nvbn/roboarm
+.. image:: https://coveralls.io/repos/nvbn/roboarm/badge.png?branch=develop
+   :alt: Coverage Status
+   :target: https://coveralls.io/r/nvbn/roboarm
+.. image:: https://pypip.in/v/roboarm/badge.png
+   :target: https://crate.io/packages/roboarm/
+.. image:: https://pypip.in/d/roboarm/badge.png
+   :target: https://crate.io/packages/roboarm/
+
 Python library for controlling owi robotic arm edge.
 Docs available on `read the docs <https://roboarm.readthedocs.org>`_.
 
