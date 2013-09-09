@@ -11,6 +11,8 @@ Roboarm
    :target: https://crate.io/packages/roboarm/
 .. image:: https://pypip.in/d/roboarm/badge.png
    :target: https://crate.io/packages/roboarm/
+.. image:: https://goo.gl/xnKADy
+   :target: http://coviolations.io/projects/nvbn/roboarm/
 
 Python library for controlling owi robotic arm edge.
 Docs available on `read the docs <https://roboarm.readthedocs.org>`_.

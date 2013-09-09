@@ -1,0 +1,4 @@
+violations:
+  pep8: pep8 . --exclude='*docs*,*examples*'
+  sloccount: sloccount .
+  py_unittest: cat test_out
