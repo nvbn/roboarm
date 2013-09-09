@@ -4,7 +4,7 @@ Roboarm
 .. image:: https://travis-ci.org/nvbn/roboarm.png
    :alt: Build Status
    :target: https://travis-ci.org/nvbn/roboarm
-.. image:: https://coveralls.io/repos/nvbn/roboarm/badge.png?branch=develop
+.. image:: https://coveralls.io/repos/nvbn/roboarm/badge.png?branch=master
    :alt: Coverage Status
    :target: https://coveralls.io/r/nvbn/roboarm
 .. image:: https://pypip.in/v/roboarm/badge.png
