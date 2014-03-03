@@ -18,19 +18,29 @@ class Listener(Leap.Listener):
         (_.wrist.up, _.wrist.down),
         (_.grips.open, _.grips.close),
     )
+    gestures = (
+        (Leap.Gesture.TYPE_SCREEN_TAP, _.led.on, _.led.off),
+    )
 
     def __init__(self, arm):
         super(Listener, self).__init__()
         self._arm = arm
+        self._gesture_states = {
+            gesture[0]: False for gesture in self.gestures
+        }
 
     def on_connect(self, controller):
-        controller.enable_gesture(Leap.Gesture.TYPE_CIRCLE)
-        controller.enable_gesture(Leap.Gesture.TYPE_KEY_TAP)
+        """Init gestures"""
         controller.enable_gesture(Leap.Gesture.TYPE_SCREEN_TAP)
-        controller.enable_gesture(Leap.Gesture.TYPE_SWIPE)
 
     def on_frame(self, controller):
+        """On new frame"""
         frame = controller.frame()
+        self._do_gestures(frame)
+        self._do_actions(frame)
+
+    def _do_actions(self, frame):
+        """Perform actions with frame"""
         for n, hand in enumerate(frame.hands):
             avg_pos = Leap.Vector()
             for finger in hand.fingers:
@@ -44,6 +54,18 @@ class Listener(Leap.Listener):
             action = self.actions[action_n][avg_pos[1] < Y_MID]
             action(self._arm)(STEP)
             print action
+
+    def _do_gestures(self, frame):
+        """Do actions for frame gestures"""
+        for gesture in frame.gestures():
+            for gesture_type, on, off in self.gestures:
+                if gesture.type == gesture_type:
+                    if self._gesture_states[gesture_type]:
+                        on(self._arm)()
+                    else:
+                        off(self._arm)()
+                    self._gesture_states[gesture_type] =\
+                        not self._gesture_states[gesture_type]
 
 
 if __name__ == '__main__':
