@@ -1,3 +1,4 @@
+import pygame
 from fn import _
 from roboarm import Arm
 from lib import Leap
@@ -7,6 +8,53 @@ Y_MID = 200
 X_MIN = -200
 X_MAX = 200
 STEP = 0.2
+
+W = 640
+H = 480
+
+ACTIVE_COLOR = (255, 0, 0)
+INACTIVE_COLOR = (255, 255, 255)
+BKG = (0, 0, 0)
+
+BORDER = 2
+
+
+class Deck(object):
+    """Deck with separated rectangles"""
+
+    def __init__(self, x, y):
+        self._x = x
+        self._y = y
+        self._rect_x = (W - x * BORDER) / x
+        self._rect_y = (H - y * BORDER) / y
+        self._init_pygame()
+
+    def _init_pygame(self):
+        """Init pygame"""
+        pygame.init()
+        self.window = pygame.display.set_mode((W, H))
+        self.window.fill(BKG)
+        self._draw_rects()
+
+    def _draw_rects(self, now_x=None, now_y=None):
+        for x in range(self._x):
+            for y in range(self._y):
+                color = ACTIVE_COLOR if now_x == x and now_y == y\
+                    else INACTIVE_COLOR
+                self.window.fill(
+                    color,
+                    pygame.Rect(
+                        x * self._rect_x + x * BORDER,
+                        y * self._rect_y + y * BORDER,
+                        self._rect_x,
+                        self._rect_y,
+                    ),
+                )
+        pygame.display.update()
+
+    def highlight(self, x, y):
+        """Highlight rectangel"""
+        self._draw_rects(x, y)
 
 
 class Listener(Leap.Listener):
@@ -28,6 +76,7 @@ class Listener(Leap.Listener):
         self._gesture_states = {
             gesture[0]: False for gesture in self.gestures
         }
+        self._deck = Deck(len(self.actions), len(self.actions[0]))
 
     def on_connect(self, controller):
         """Init gestures"""
@@ -51,7 +100,9 @@ class Listener(Leap.Listener):
                 action_n = int(avg_pos[0] - X_MIN) / (x_range / len(self.actions))
             except ValueError:
                 continue
-            action = self.actions[action_n][avg_pos[1] < Y_MID]
+            action_y = avg_pos[1] < Y_MID
+            action = self.actions[action_n][action_y]
+            self._deck.highlight(action_n, action_y)
             action(self._arm)(STEP)
             print action
 
