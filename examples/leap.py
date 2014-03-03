@@ -3,29 +3,25 @@ from roboarm import Arm
 from lib import Leap
 
 
-STEP = 0.3
-LEFT = 0
-RIGHT = 1
-X = 0
-Y = 1
-Z = 2
+Y_MID = 200
+X_MIN = -200
+X_MAX = 200
+STEP = 0.2
 
 
 class Listener(Leap.Listener):
     """Leap motion actions listner"""
     actions = (
-        ((1, 2), Y, _.shoulder.up, _.shoulder.down),
-        ((1, 2), X, _.base.rotate_counter, _.base.rotate_clock),
-        ((3, 4), Y, _.elbow.up, _.elbow.down),
-        ((3, 4), X, _.wrist.up, _.wrist.down),
+        (_.base.rotate_clock, _.base.rotate_counter),
+        (_.shoulder.up, _.shoulder.down),
+        (_.elbow.up, _.elbow.down),
+        (_.wrist.up, _.wrist.down),
+        (_.grips.open, _.grips.close),
     )
 
     def __init__(self, arm):
         super(Listener, self).__init__()
         self._arm = arm
-        self._skip = 0
-        self._last_avg = [(0, 0, 0), (0, 0, 0)]
-        self._last_events = [None, None]
 
     def on_connect(self, controller):
         controller.enable_gesture(Leap.Gesture.TYPE_CIRCLE)
@@ -40,15 +36,14 @@ class Listener(Leap.Listener):
             for finger in hand.fingers:
                 avg_pos += finger.tip_position
             avg_pos /= len(hand.fingers)
-            fingers = len(hand.fingers)
-            for action in self.actions:
-                if fingers in action[0]:
-                    if avg_pos[action[1]] > self._last_avg[n][action[1]]:
-                        action[2](self._arm)(STEP)
-                    else:
-                        action[3](self._arm)(STEP)
-            print avg_pos, fingers
-            self._last_avg[n] = avg_pos
+            x_range = X_MAX - X_MIN
+            try:
+                action_n = int(avg_pos[0] - X_MIN) / (x_range / len(self.actions))
+            except ValueError:
+                continue
+            action = self.actions[action_n][avg_pos[1] < Y_MID]
+            action(self._arm)(STEP)
+            print action
 
 
 if __name__ == '__main__':
