@@ -12,7 +12,7 @@ Z = 2
 
 
 class Listener(Leap.Listener):
-    # (fingers, hands, dimension, action)
+    """Leap motion actions listner"""
     actions = (
         ((1, 2), Y, _.shoulder.up, _.shoulder.down),
         ((1, 2), X, _.base.rotate_counter, _.base.rotate_clock),
@@ -33,19 +33,6 @@ class Listener(Leap.Listener):
         controller.enable_gesture(Leap.Gesture.TYPE_SCREEN_TAP)
         controller.enable_gesture(Leap.Gesture.TYPE_SWIPE)
 
-    def state_string(self, state):
-        if state == Leap.Gesture.STATE_START:
-            return "STATE_START"
-
-        if state == Leap.Gesture.STATE_UPDATE:
-            return "STATE_UPDATE"
-
-        if state == Leap.Gesture.STATE_STOP:
-            return "STATE_STOP"
-
-        if state == Leap.Gesture.STATE_INVALID:
-            return "STATE_INVALID"
-
     def on_frame(self, controller):
         frame = controller.frame()
         for n, hand in enumerate(frame.hands):
@@ -62,17 +49,6 @@ class Listener(Leap.Listener):
                         action[3](self._arm)(STEP)
             print avg_pos, fingers
             self._last_avg[n] = avg_pos
-
-
-    @property
-    def allow(self):
-        self._skip += 1
-        if self._skip > 100:
-            self._skip = 0
-            return True
-        else:
-            return False
-
 
 
 if __name__ == '__main__':
