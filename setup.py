@@ -21,6 +21,7 @@ setup(name='roboarm',
       zip_safe=True,
       install_requires=[
           'pyusb',
+          'fn',
       ],
       entry_points="""
       # -*- Entry points: -*-
