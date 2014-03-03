@@ -20,7 +20,7 @@ setup(name='roboarm',
       include_package_data=True,
       zip_safe=True,
       install_requires=[
-          'pyusb',
+          'pyusb==1.0.0b1',
           'fn',
       ],
       entry_points="""
